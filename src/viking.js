@@ -42,7 +42,47 @@ class Saxon extends Soldier {
 }
 
 // War
-class War {}
+class War {
+  constructor() {
+    this.vikingArmy = [];
+    this.saxonArmy = [];
+  }
+  addViking = (Viking) => {
+    this.vikingArmy.push(Viking);
+  };
+  addSaxon = (Saxon) => {
+    this.saxonArmy.push(Saxon);
+  };
+  vikingAttack = () => {
+    let randomSaxon =
+      this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)];
+    let randomViking =
+      this.vikingArmy[Math.floor(Math.random() * this.vikingArmy.length)];
+
+    const resultOfAttack = randomSaxon.receiveDamage(randomViking.attack());
+
+    if (randomSaxon.health <= 0) {
+      this.saxonArmy.splice(randomSaxon, 1);
+    }
+
+    return resultOfAttack;
+  };
+  saxonAttack = () => {
+    let randomSaxon =
+      this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)];
+    let randomViking =
+      this.vikingArmy[Math.floor(Math.random() * this.vikingArmy.length)];
+
+    const resultOfAttack = randomViking.receiveDamage(randomSaxon.attack());
+
+    if (randomViking.health <= 0) {
+      this.vikingArmy.splice(randomViking, 1);
+    }
+
+    return resultOfAttack;
+  };
+  showStatus = () => {};
+}
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
